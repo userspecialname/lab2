@@ -180,21 +180,18 @@ public:
     }
 
     LinkedList<T>* Concat(LinkedList<T>* list) {
-        LinkedList<T>* newList = new LinkedList<T>();
-
-        Node* current = head;
-        while (current != nullptr) {
-            newList->Append(current->value);
-            current = current->next;
+        if (this->tail == nullptr){
+            return list;
         }
 
-        current = list->head;
-        while (current != nullptr) {
-            newList->Append(current->value);
-            current = current->next;
+        if (list->head == nullptr){
+            return this;
         }
 
-        return newList;
+        this->tail->next = list->head;
+        this->tail = list->tail;
+
+        return this;
     }
 
     LinkedList<T>& operator=(const LinkedList<T>& other) {
